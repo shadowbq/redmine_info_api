@@ -1,0 +1,31 @@
+api.info do
+	api.app_name Redmine::Info.app_name
+	api.url Redmine::Info.url
+	api.help_url Redmine::Info.help_url
+	api.versioned_name Redmine::Info.versioned_name
+	api.redmine_version Redmine::VERSION.to_s
+	api.ruby_version "#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL} (#{RUBY_RELEASE_DATE}) [#{RUBY_PLATFORM}]"
+	api.rails_version Rails::VERSION::STRING
+	api.environment Rails.env
+	api.database_adapter ActiveRecord::Base.connection.adapter_name
+	api.array :checklist do
+		@checklist.each do |check|
+			api.check :check => check[0], :value => check[1]
+		end
+	end
+	api.array :scms do
+		Redmine::Scm::Base.all.each do |scm|
+			scm_class = "Repository::#{scm}".constantize
+			if scm_class.scm_available
+				api.scm :scm => scm.to_s, :scm_version => scm_class.scm_version_string
+			end
+		end
+	end
+
+	api.array :plugins do
+		plugins = Redmine::Plugin.all
+		plugins.each do |plugin|
+			 api.plugin :plugin => plugin.id.to_s, :plugin_version => plugin.version.to_s
+		end
+	end
+end
