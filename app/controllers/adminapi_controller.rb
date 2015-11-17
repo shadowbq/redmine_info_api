@@ -16,7 +16,6 @@ class AdminapiController < ApplicationController
     ]
 
     respond_to do |format|
-      format.html
       format.api
     end
   end
