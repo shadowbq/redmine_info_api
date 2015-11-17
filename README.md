@@ -5,9 +5,8 @@ About
 -----
 
 Plugin for Redmine that adds functionality to read the Redmine::Info as an API.
-We use this plugin as backend for mobile application for time tracking.
 
-This is exposed as 
+This is exposed as:
 
 https://redmine.example.com//adminapi/info.json
 
