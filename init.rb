@@ -8,6 +8,6 @@ Redmine::Plugin.register :redmine_info_api do
   url 'http://github.com/shadowbq/redmine_info_api'
   author_url 'mailto:shadowbq@gmail.com'
 
-  version '0.0.2'
+  version '0.0.3'
   requires_redmine :version_or_higher => '2.0.0'
 end
