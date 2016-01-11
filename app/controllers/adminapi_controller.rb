@@ -1,9 +1,14 @@
 class AdminapiController < ApplicationController
+  unloadable
+  skip_before_filter :check_if_login_required
+  skip_before_filter :verify_authenticity_token
+
   before_filter :require_admin
+  accept_api_auth :info
+
   helper :sort
   include SortHelper
 
-  accept_api_auth :info
 
   def info
     @db_adapter_name = ActiveRecord::Base.connection.adapter_name
